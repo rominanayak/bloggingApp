@@ -30,4 +30,28 @@ namespace bloggingApp.Models
             return new ApplicationDbContext();
         }
     }
+
+    public class BlogDbContext : DbContext
+    {
+        public BlogDbContext() : base("BlogConnection")
+        { }
+
+        public static BlogDbContext Create()
+        {
+            return new BlogDbContext();
+        }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Reply> Replies { get; set; }
+        public DbSet<PostCategory> PostCategories { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<PostLike> PostLikes { get; set; }
+        public DbSet<CommentLike> CommentLikes { get; set; }
+        public DbSet<ReplyLike> ReplyLikes { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+            //modelBuilder.Conventions.Remove<PluralizingTableNameConventions>();
+        }
+    }
 }
